@@ -1,20 +1,64 @@
 const form = document.querySelector('.feedback-form');
-const mail = document.querySelector('.feedback-form input');
-const message = document.querySelector('.feedback-form textarea');
+const emailInput = form.querySelector('input[name="email"]');
+const messageInput = form.querySelector('textarea[name="message"]');
 
-mail.value = localStorage.getItem('Mail') || '';
-message.value = localStorage.getItem('Mesaj') || '';
+// LocalStorage için kullanılacak anahtar
+const STORAGE_KEY = 'feedback-form-state';
 
-mail.addEventListener('input', event => {
-  localStorage.setItem('Mail', event.target.value);
+// Formdaki verileri saklayacağımız obje
+let formData = {
+  email: '',
+  message: '',
+};
+
+// --- 1) Sayfa açıldığında localStorage'dan verileri geri yükle ---
+const savedData = localStorage.getItem(STORAGE_KEY);
+if (savedData) {
+  // JSON formatındaki string'i parse ediyoruz
+  formData = JSON.parse(savedData);
+
+  // Eğer kaydedilmiş email varsa input'a yazdır
+  if (formData.email) {
+    emailInput.value = formData.email;
+  }
+
+  // Eğer kaydedilmiş message varsa textarea'ya yazdır
+  if (formData.message) {
+    messageInput.value = formData.message;
+  }
+}
+
+// --- 2) Form üzerinde delegasyon kullanarak input event'ini dinle ---
+form.addEventListener('input', e => {
+  // Hangi input değiştiyse onun name değerine göre kaydediyoruz
+  formData[e.target.name] = e.target.value.trim();
+
+  // Objenin güncel halini localStorage'a yazıyoruz
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 });
-message.addEventListener('input', e => {
-  localStorage.setItem('Mesaj', e.target.value);
-});
 
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  localStorage.removeItem('Mesaj');
-  localStorage.removeItem('Mail');
+// --- 3) Submit event'inde verileri kontrol et, console.log yap ve temizle ---
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  // Eğer email veya message boşsa uyarı ver ve devam etme
+  if (!emailInput.value.trim() || !messageInput.value.trim()) {
+    alert('Lütfen tüm alanları doldurun!');
+    return;
+  }
+
+  // Konsola form verilerini yazdır
+  console.log({
+    email: emailInput.value.trim(),
+    message: messageInput.value.trim(),
+  });
+
+  // LocalStorage'dan temizle
+  localStorage.removeItem(STORAGE_KEY);
+
+  // formData objesini sıfırla
+  formData = { email: '', message: '' };
+
+  // Formu sıfırla
   form.reset();
 });

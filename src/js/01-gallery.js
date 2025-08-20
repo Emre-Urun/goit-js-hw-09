@@ -66,7 +66,9 @@ const images = [
     description: 'Lighthouse Coast Sea',
   },
 ];
+
 const gallery = document.querySelector('.gallery');
+
 function createMarkup(arr) {
   return arr
     .map(({ preview, original, description }) => {
@@ -86,4 +88,10 @@ function createMarkup(arr) {
 
 gallery.insertAdjacentHTML('beforeend', createMarkup(images));
 
-new SimpleLightbox('.gallery a');
+let g = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionSelector: 'img',
+  captionType: 'attr',
+  captionsData: 'alt',
+  captionDelay: 250,
+});
