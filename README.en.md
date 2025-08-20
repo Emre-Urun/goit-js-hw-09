@@ -1,61 +1,50 @@
 # JavaScript Practice Projects
 
-This repository contains two small projects built during my JavaScript learning
-journey:  
+This repository contains two small projects built during my JavaScript learning journey:  
 📌 **Image Gallery with SimpleLightbox**  
-📌 **Feedback Form with LocalStorage**
+📌 **Feedback Form with LocalStorage**  
 
 ---
 
-# 🇹🇷 Türkçe
-
-## 📌 Projeler
+## 📌 Projects
 
 ### 1. Image Gallery with SimpleLightbox
+- **Goal:**  
+  Provide a clickable gallery of preview images.  
+  When an image is clicked, the larger version opens and its description (`alt`) is shown with a 250ms delay.  
 
-- **Amaç:**  
-  Kullanıcıya tıklanabilir küçük görsellerden oluşan bir galeri sunmak.  
-  Tıklanan görsel büyük boyutta açılır ve açıklama metni (`alt`) 250ms
-  gecikmeyle gösterilir.
+- **Technologies:**  
+  - JavaScript (ES6)  
+  - [SimpleLightbox](https://simplelightbox.com/) library  
 
-- **Teknolojiler:**
-
-  - JavaScript (ES6)
-  - [SimpleLightbox](https://simplelightbox.com/) kütüphanesi
-
-- **Özellikler:**
-  - Resimler `alt` attribute ile açıklama alır.
-  - Açıklama metni, büyük görsel açıldığında 250ms gecikmeyle görünür.
-  - Responsive yapı.
+- **Features:**  
+  - Images use `alt` text as captions.  
+  - Captions appear with a 250ms delay after opening.  
+  - Responsive layout.  
 
 ---
 
 ### 2. Feedback Form with LocalStorage
+- **Goal:**  
+  Preserve user input in a feedback form without losing it on page reload.  
 
-- **Amaç:**  
-  Kullanıcının form alanlarına girdiği verileri kaybetmeden saklamak.  
-  Sayfa yenilense bile veriler localStorage’dan geri yüklenir.
+- **Technologies:**  
+  - JavaScript (ES6)  
+  - LocalStorage API  
 
-- **Teknolojiler:**
-
-  - JavaScript (ES6)
-  - LocalStorage API
-
-- **Özellikler:**
-  - Form üzerinde delegasyon ile `input` event’i dinlenir.
-  - Kullanıcı her veri girdiğinde, email ve message alanları
-    `feedback-form-state` anahtarı altında localStorage’da saklanır.
-  - Sayfa yenilendiğinde veriler geri yüklenir.
-  - Submit edildiğinde:
-    - Email ve message boş değilse konsola yazdırılır.
-    - LocalStorage temizlenir.
-    - Form sıfırlanır.
+- **Features:**  
+  - Uses event delegation to listen for `input` events on the form.  
+  - Saves email and message under one key (`feedback-form-state`) in localStorage.  
+  - Automatically restores saved data when the page reloads.  
+  - On submit:  
+    - Checks that both fields are filled.  
+    - Logs the data object to the console.  
+    - Clears localStorage and resets the form.  
 
 ---
 
-## 🚀 Nasıl Çalıştırılır?
+## 🚀 How to Run
 
-1. Bu projeyi klonlayın:
+1. Clone this project:
    ```bash
-   git clone https://github.com/kullaniciadi/proje-adi.git
-   ```
+   git clone https://github.com/username/project-name.git
